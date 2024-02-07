@@ -1,0 +1,5 @@
+"chr","pos","alt","type","effect","gene_name","gene","protein_coding","NA_change","AA_change","snp"
+"Chromosome",2154089,"A","missense_variant","MODERATE","katG","Rv1908c","protein_coding","c.2023G>T","p.Asp675Tyr","Chromosome_2154089_A"
+"Chromosome",2154724,"A","missense_variant","MODERATE","katG","Rv1908c","protein_coding","c.1388G>T","p.Arg463Leu","Chromosome_2154724_A"
+"Chromosome",2155168,"G","missense_variant","MODERATE","katG","Rv1908c","protein_coding","c.944G>C","p.Ser315Thr","Chromosome_2155168_G"
+"Chromosome",2155414,"C","missense_variant","MODERATE","katG","Rv1908c","protein_coding","c.698A>G","p.Glu233Gly","Chromosome_2155414_C"
