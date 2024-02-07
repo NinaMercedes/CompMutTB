@@ -14,7 +14,7 @@ option_list <- list(
     help="Directory containing fastq-files"),
   make_option(c("-s", "--sample_names"), type="character", default="sample_names.txt",
     help="Name of file containing sample names"),
-  make_option(c("-v", "--vcf_gz"), type="character", default="mtb_vcf/mtb.genotyped.ann.vcf",
+  make_option(c("-v", "--vcf_gz"), type="character", default="mtb_vcf/mtb.genotyped.ann.vcf.gz",
     help="Insert path to vcf.gz file"),
   make_option(c("-r", "--region"), type="character", default="region.tsv",
     help="Insert path to tsv file containing gene boundaries"),
@@ -57,7 +57,7 @@ cat(" *Making vcf \n")
   system(paste0("bcftools annotate --rename-chrs rename_chr.txt -Oz mtb_vcf/mtb.genotyped.filtered_no_indels.vcf.gz > mtb_vcf/mtb.genotyped.chr.vcf.gz")) #rename chromosomes to be compatible with snpeff
   system(paste0("snpEff download -v Mycobacterium_tuberculosis_h37rv")) #download snpeff db
   system(paste0("snpEff ann -v Mycobacterium_tuberculosis_h37rv mtb_vcf/mtb.genotyped.chr.vcf.gz > mtb_vcf/mtb.genotyped.ann.vcf")) #annotate using snpeff
-  system(paste0("gzip mtb_vcf/mtb.genotyped.ann.vcf")) #rezip vcf
+  system(paste0("bgzip mtb_vcf/mtb.genotyped.ann.vcf")) #rezip vcf
   #system(paste0("rm -r mtb*")) #remove directories that are no longer required
 }
 # Function to filter vcf by gene region and get missense SNPs
