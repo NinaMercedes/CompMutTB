@@ -1,6 +1,0 @@
-name: CompMutTB
-channels:
-  - conda-forge
-  - bioconda
-  - defaults
-prefix: /mnt/storage10/nbillows/miniforge3/envs/CompMutTB
