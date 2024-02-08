@@ -35,4 +35,36 @@ The following files are required:
 - out_geno_nolin: name of geno file to output without lineage-specific variants
 - out_vcf: name of vcf to output containing only regions data (useful for further analysis e.g. MAF calculation)
 
-  
+ Outputs will include a genotype matrix, filtered vcf.gz and variant information file (*_info.csv").
+
+### Association and Mediation Analysis 
+CompMutTB use both association and mediation tests to identify potential compensatory mutations. Once you have a genotype matrix for each region, you can use the following code to perform the tests (see example data for how matrices should look). Association tests are first used as a screening method to identify any mutations associated with the drug-resistant phenotype in question and their snp-snp associations. Mediation analysis follows (see paper for details on how this works). As this can take some time, it is recommended that this is only performed on significant mutation pairs output by the association analysis. A threshold can be set using the command line, if you want to run all pairs use a threshold of 1. The default is 0.05. All p-values are adjusted for using the false discovery rate.
+```
+#Association between rpoB and rpoC example data
+Rscript data/code/assoc_test.R --geno_a "data/rpoB.geno" --geno_b "data/rpoC.geno" --chi_file "data/rpoB_rpoC_chi.csv" --metadata "data/test_metadata.csv" --drug "rifampicin" --sample_names "data/names.txt"
+#Mediation between rpoB and rpoC example data with relaxed threshold of 0.6 to generate some results
+Rscript data/code/med_test.R --geno_a "data/rpoB.geno" --geno_b "data/rpoC.geno" --chi_file "data/rpoB_rpoC_chi.csv" --metadata "data/test_metadata.csv" --drug "rifampicin" --sample_names "data/names.txt" --med_file "data/rpoB_rpoC_med.csv" --threshold 0.6
+```
+These scripts require the following files/ information:
+- geno_a: a genotype matrix for potential drug-resistance mutations e.g. *rpoB* (see example data)
+- geno_b: a genotype matrix for potential compensatory mutations e.g. *rpoC* (see example data)
+- chi_file: name of file to output association analysis (csv)
+- metadata: csv files containing metadata for each sample, missing data should be encoded NA. Headers should include at least id, drug... 
+- drug: phenotype to use as outcome variable
+- sample_names: text file containing sample names in metadata
+- med_file: name of file to output mediation analysis (csv)
+- threshold: threshold for significant association to filter out variants for mediation analysis
+
+Outputs including results file containing results for association and mediation analyses.
+
+### Interpretation
+This step takes the final mediation analysis results and interprets how likely compensatory mutations are to be a potential compensatory mutation using pre-defined thresholds. This requires an info file (csv) containing additional context for each SNP (see example data *_info.csv), if no additional information is required, please use a file with at least two columns "snp" containing the snp ids and "info" with 'none' as a descriptor for each row. 
+```
+#Interpret Results
+Rscript data/code/interpret_results.R   --med_file "data/rpoB_rpoC_med.csv" --out_file "data/rpoB_rpoC_example_results.csv" --chi_only "data/rpoB_rpoC_example_chi_only.csv" --info_file_r1 "data/rpoB_info.csv" --info_file_r2 "data/rpoC_info.csv" 
+```
+Inputs/ outputs include:
+- med_file: name of file output by mediation analysis (csv)
+- out_file: name final results file to output (csv)
+- info_file_r1: variant information for potential drug-resistance mutations e.g. *rpoB* (see example data), must contain column 'snp'
+- info_file_r2: variant information for potential compensatory mutations e.g. *rpoC* (see example data) (see example data), must contain column 'snp'
