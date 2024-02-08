@@ -61,7 +61,8 @@ Outputs including results file containing results for association and mediation 
 This step takes the final mediation analysis results and interprets how likely compensatory mutations are to be a potential compensatory mutation using pre-defined thresholds. This requires an info file (csv) containing additional context for each SNP (see example data *_info.csv), if no additional information is required, please use a file with at least two columns "snp" containing the snp ids and "info" with 'none' as a descriptor for each row. 
 ```
 #Interpret Results
-Rscript data/code/interpret_results.R   --med_file "data/rpoB_rpoC_med.csv" --out_file "data/rpoB_rpoC_example_results.csv" --chi_only "data/rpoB_rpoC_example_chi_only.csv" --info_file_r1 "data/rpoB_info.csv" --info_file_r2 "data/rpoC_info.csv" 
+Rscript data/code/interpret_results.R   --med_file "data/rpoB_rpoC_med.csv" --out_file "data/rpoB_rpoC_example_results.csv" --chi_only "data/rpoB_rpoC_example_chi_only.csv" --info_file_r1 "data/rpoB_info.csv" --info_file_r2 "data/rpoC_info.csv"
+conda deactivate
 ```
 Inputs/ outputs include:
 - med_file: name of file output by mediation analysis (csv)
