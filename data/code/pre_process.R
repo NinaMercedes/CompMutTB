@@ -116,8 +116,10 @@ format_geno <- function(geno_table, sample_names, out_geno){
   geno_table <- t(geno_table)
   colnames(geno_table)<- snp_name
   geno_table <- apply(geno_table,2, function(x) as.numeric(as.character(x)))
+  columns <- names(which(colSums(geno_table, na.rm=TRUE)>0))
   geno_table <- geno_table[,(which(colSums(geno_table, na.rm=TRUE)>0))]
   geno_table <- data.frame(geno_table)
+  colnames(geno_table) <- columns
   rownames(geno_table) <- sample_name[,1]
   write.table(geno_table, out_geno, sep = " ", quote=FALSE, row.names=TRUE)
   return(geno_table)
