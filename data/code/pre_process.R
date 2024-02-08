@@ -20,7 +20,7 @@ option_list <- list(
     help="Insert path to tsv file containing gene boundaries"),
   make_option(c("-f", "--filter_vcf"), type="character", default=TRUE,
     help="Filter vcf file: arguments should be TRUE or FALSE"),
-  make_option(c("-o", "--out_vcf"), type="character", default=FALSE,
+  make_option(c("-o", "--out_vcf"), type="character", default="region.vcf.gz",
     help="Name of filtered vcf.gz to output for gene "), 
   make_option(c("-j", "--make_geno"), type="character", default=TRUE,
     help="Make genotype file: arguments should be TRUE or FALSE"), 
