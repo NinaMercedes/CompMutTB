@@ -10,7 +10,7 @@ conda env update --file conda/CompMutTB.yml
 Rscript conda/setup.R
 conda deactivate
 ```
-## How to use CompMutTB
+## How to use CompMut-TB
 ### Pre-processing
 CompMutTB is written in R language and uses custom R scripts that can be run from command line. To make CompMutTB flexible its use is split up in stages to accomodate different pre-processing pipelines. For optimal use it is recommended that CompMutTB is run using a genotype matrix. A pre-processing pipeline is available in CompMutTB an can either run from *M. tuberculosis* fastq.gz or multi-sample vcf.gz files. Please note that if you are inputting a multi-sample vcf.gz file, please ensure that your file is annotated using SnpEff (Mycobacterium_tuberculosis_h37rv) to be able to filter missense mutations, this is not a requirement if filtering by variant type is not required. An example is shown here for *katG* (missense filtering) and *oxyR'-ahpC* regions (no missense filtering). This should be done for each individual region e.g. *katG* and then *oxyR'-ahpC* as shown.
 ```
