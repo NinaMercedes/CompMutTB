@@ -69,7 +69,7 @@ filter_vcf <- function(region, vcf_gz, out_vcf, missense){
     arg3 <- "> temp.vcf"
     system(paste(arg1, arg2, arg3))
     system(paste("bgzip -c temp.vcf > temp.vcf.gz"))
-    system(paste("rm temp.vcf"))
+    #system(paste("rm temp.vcf"))
     vcf_gz <- "temp.vcf.gz"
   } 
   system(paste("bcftools index -c --force", vcf_gz))
